@@ -1,0 +1,19 @@
+@model GreenOasisResort.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error | Green Oasis Resort";
+}
+
+<section class="page-header" style="background: var(--bg-surface); min-height: 320px; display:flex; align-items:center;">
+    <div class="container page-header-content" style="padding: 4rem 0;">
+        <span class="hero-badge">Error</span>
+        <h1 style="margin-top:0.8rem;">Something Went Wrong</h1>
+        <p>We're sorry — an unexpected error occurred. Please try again or contact our support team.</p>
+        @if (Model.ShowRequestId)
+        {
+            <p style="font-size:0.8rem; color: var(--text-faint); margin-top:1rem;">
+                Request ID: <code style="color: var(--accent-primary);">@Model.RequestId</code>
+            </p>
+        }
+        <a class="btn btn-accent mt-3" asp-controller="Home" asp-action="Index">Return Home</a>
+    </div>
+</section>
