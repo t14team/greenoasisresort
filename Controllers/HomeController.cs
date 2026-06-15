@@ -14,9 +14,9 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public async Task<IActionResult> Index(string? gclid, string? gbraid)
+      public async Task<IActionResult> Index(string? gclid, string? gbraid)
     {
-         string googleId = "";
+        string googleId = "";
 
         if (!string.IsNullOrEmpty(gclid))
         {
@@ -46,7 +46,9 @@ public class HomeController : Controller
                 return View("Indexv2");
             }
         }
-        var hotels = new List<HotelCard>
+
+
+         var hotels = new List<HotelCard>
         {
             new()
             {
@@ -82,8 +84,12 @@ public class HomeController : Controller
             }
         };
 
+
         return View(hotels);
     }
+    
+
+  
 
     public IActionResult About() => View();
 
