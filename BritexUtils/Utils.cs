@@ -99,15 +99,22 @@ namespace britex
 
         public static int logClick(string ip, string country, bool showrealcontent, string useragent, string site)
         {
-            int id;
-            SqlConnection conn = new SqlConnection("Data Source=bbps.database.windows.net;Database=bbps314;user id=bbps;password=Britex2020@;\n");
-            conn.Open();
-            using (SqlCommand command = new SqlCommand($"insert into Logs output INSERTED.Id Values('{ip}','{country}',{Convert.ToByte(showrealcontent).ToString()},'{useragent}',GETDATE(),0,'{site}');", conn))
+            try
             {
-                id = (int)command.ExecuteScalar();
+                int id;
+                SqlConnection conn = new SqlConnection("Data Source=bbps.database.windows.net;Database=bbps314;user id=bbps;password=Britex2020@;\n");
+                conn.Open();
+                using (SqlCommand command = new SqlCommand($"insert into Logs output INSERTED.Id Values('{ip}','{country}',{Convert.ToByte(showrealcontent).ToString()},'{useragent}',GETDATE(),0,'{site}');", conn))
+                {
+                    id = (int)command.ExecuteScalar();
+                }
+                conn.Close();
+                return id;
             }
-            conn.Close();
-            return id;
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public static void Shuffle<T>(this IList<T> list)

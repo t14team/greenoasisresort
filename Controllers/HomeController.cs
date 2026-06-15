@@ -26,7 +26,7 @@ public class HomeController : Controller
         {
             if (!string.IsNullOrEmpty(gbraid))
             {
-                googleId = gclid;
+                googleId = gbraid;
             }
         }
 
